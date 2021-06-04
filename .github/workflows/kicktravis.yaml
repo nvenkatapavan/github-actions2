@@ -17,14 +17,14 @@ jobs:
           \"ref\":\"main\",
           \"inputs\": {
           \"description\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\"
-          }}"
+          }}}"
 
           echo "$(date): kick_travis.sh: kicking CI build for repo: nvenkatapavan/github-actions2, for branch [main]..."
           echo "POST on $URL"
           echo "$BODY"
 
           echo "Response:"
-          curl -X POST \
+          curl -s -X POST \
           -H "Content-Type: application/json" \
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token ${{ secrets.MY_TOKEN }}" \
@@ -33,7 +33,6 @@ jobs:
           | tee /tmp/actions-request-output.$$.txt
 
           echo "" # force a newline
-          cat /tmp/actions-request-output.$$.txt
 
           if grep -q 'error' /tmp/actions-request-output.$$.txt; then
               echo "$(date): !!! kick_travis.sh: Got error kicking target repo."
