@@ -32,16 +32,10 @@ jobs:
           "$URL" \
           | tee /tmp/actions-request-output.$$.txt
 
-          echo "" # force a newline
-
-          if grep -q 'error' /tmp/actions-request-output.$$.txt; then
+          if grep -q 'message' /tmp/actions-request-output.$$.txt; then
               echo "$(date): !!! kick_travis.sh: Got error kicking target repo."
               exit 1
           fi
-
-          if grep -q 'access denied' /tmp/actions-request-output.$$.txt; then
-              echo "$(date): !!! kick_travis.sh: Got 'access denied' when kicking target repo.  Verify GHE_TOKEN is valid."
-              exit 1
-          fi        
+      
 
 
