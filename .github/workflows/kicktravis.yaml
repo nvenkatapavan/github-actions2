@@ -11,7 +11,7 @@ jobs:
         owner: nvenkatapavan
         repo: github-actions3
         github_token: ${{ secrets.MY_TOKEN }}
-        workflow_file_name: main.yml
+        workflow_file_name: main.yaml
         ref: main
         wait_interval: 10
         inputs: '{}'
