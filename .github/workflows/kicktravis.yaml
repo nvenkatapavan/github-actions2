@@ -10,7 +10,7 @@ jobs:
         run: |
           echo "CI: Github actions"
           env
-          URL="https://api.github.com/repos/nvenkatapavan/github-actions2/actions/workflows/main.yaml/dispatches"
+          URL="https://api.github.com/repos/nvenkatapavan/github-actions3/actions/workflows/main.yaml/dispatches"
           BODY="{
           \"ref\":\"main\",
           \"inputs\": {
