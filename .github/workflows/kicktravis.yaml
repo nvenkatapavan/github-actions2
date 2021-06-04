@@ -28,6 +28,7 @@ jobs:
           | tee /tmp/actions-request-output.$$.txt
 
           echo "" # force a newline
+          cat /tmp/actions-request-output.$$.txt
 
           if grep -q 'error' /tmp/actions-request-output.$$.txt; then
               echo "$(date): !!! kick_travis.sh: Got error kicking target repo."
