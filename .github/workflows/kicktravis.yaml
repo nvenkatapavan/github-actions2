@@ -16,8 +16,10 @@ jobs:
           BODY="{
           \"ref\":\"main\",
           \"inputs\": {
-          \"message\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\"
-          }}"
+          \"message\": {
+          \"description\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\",
+          \"required\": \"true\"
+          }}}"
 
           echo "$(date): kick_travis.sh: kicking CI build for repo: nvenkatapavan/github-actions2, for branch [main]..."
           echo "POST on $URL"
