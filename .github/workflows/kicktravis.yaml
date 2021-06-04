@@ -25,7 +25,7 @@ jobs:
           curl -s -X POST \
           -H "Content-Type: application/json" \
           -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token ${{secrets.MY_TOKEN}}" \
+          -H "Authorization: token ${{ secrets.MY_TOKEN }}" \
           -d "$BODY" \
           "$URL" \
           | tee /tmp/actions-request-output.$$.txt
