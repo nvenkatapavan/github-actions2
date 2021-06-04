@@ -17,8 +17,7 @@ jobs:
           \"ref\":\"main\",
           \"inputs\": {
           \"message\": {
-          \"description\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\",
-          \"required\": true
+          \"description\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\"
           }}}"
 
           echo "$(date): kick_travis.sh: kicking CI build for repo: nvenkatapavan/github-actions2, for branch [main]..."
