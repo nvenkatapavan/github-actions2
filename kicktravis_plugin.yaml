@@ -1,0 +1,22 @@
+name: kick travis
+
+on: [push, pull_request]
+
+jobs:
+  run-shell-command:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: convictional/trigger-workflow-and-wait@v1.3.0
+      with:
+        owner: nvenkatapavan
+        repo: github-actions3
+        github_token: ${{ secrets.MY_TOKEN }}
+        workflow_file_name: main.yaml
+        ref: main
+        wait_interval: 10
+        inputs: '{}'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+

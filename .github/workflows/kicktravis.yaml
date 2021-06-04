@@ -6,17 +6,40 @@ jobs:
   run-shell-command:
     runs-on: ubuntu-latest
     steps:
-    - uses: convictional/trigger-workflow-and-wait@v1.3.0
-      with:
-        owner: nvenkatapavan
-        repo: github-actions3
-        github_token: ${{ secrets.MY_TOKEN }}
-        workflow_file_name: main.yaml
-        ref: main
-        wait_interval: 10
-        inputs: '{}'
-        propagate_failure: false
-        trigger_workflow: true
-        wait_workflow: true
+      - name: multiline script
+        run: |
+          echo "CI: Github actions"
+
+          URL="https://api.github.com/repos/nvenkatapavan/github-actions2/actions/workflows/main.yaml/dispatches"
+          BODY="{
+          \"ref\":\"main\",
+          \"inputs\": {
+          \"message\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\"
+          }}"
+
+          echo "$(date): kick_travis.sh: kicking CI build for repo: nvenkatapavan/github-actions2, for branch [main]..."
+          echo "POST on $URL"
+          echo "$BODY"
+
+          echo "Response:"
+          curl -s -X POST \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${secrets.MY_TOKEN}" \
+          -d "$BODY" \
+          "$URL" \
+          | tee /tmp/actions-request-output.$$.txt
+
+          echo "" # force a newline
+
+          if grep -q 'error' /tmp/actions-request-output.$$.txt; then
+              echo "$(date): !!! kick_travis.sh: Got error kicking target repo."
+              exit 1
+          fi
+
+          if grep -q 'access denied' /tmp/actions-request-output.$$.txt; then
+              echo "$(date): !!! kick_travis.sh: Got 'access denied' when kicking target repo.  Verify GHE_TOKEN is valid."
+              exit 1
+          fi        
 
 
