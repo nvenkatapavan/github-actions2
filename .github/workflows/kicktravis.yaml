@@ -6,7 +6,7 @@ jobs:
   run-shell-command:
     runs-on: ubuntu-latest
     steps:
-      - name: multiline script
+      - name: kick travis
         run: |
           echo "CI: Github actions"
 
@@ -14,7 +14,7 @@ jobs:
           BODY="{
           \"ref\":\"main\",
           \"inputs\": {
-          \"message\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\"
+          \"message\":  \"Triggered by upstream build of $GITHUB_REPOSITORY \"
           }}"
 
           echo "$(date): kick_travis.sh: kicking CI build for repo: nvenkatapavan/github-actions2, for branch [main]..."
