@@ -14,7 +14,10 @@ jobs:
           env
           URL="https://api.github.com/repos/nvenkatapavan/github-actions3/actions/workflows/main.yaml/dispatches"
           BODY="{
-          \"ref\":\"main\"}"
+          \"ref\":\"main\",
+          \"inputs\": {
+          \"description\":  \"Triggered by upstream build of $GITHUB_REPOSITORY: $(git log --oneline -n 1 HEAD)\"
+          }}"
 
           echo "$(date): kick_travis.sh: kicking CI build for repo: nvenkatapavan/github-actions2, for branch [main]..."
           echo "POST on $URL"
